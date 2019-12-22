@@ -1,0 +1,51 @@
+<html>
+<head>
+
+<style type="text/css">
+ body {
+    background-color:pink;
+	margin:13em;
+	porder-width:5px;
+	porder-style:solid;
+	porder-color:blue;}
+
+</style>
+ 
+</head>
+
+
+<body>
+ <img src="sun.jpg">
+<input type="text" id ="city"/>
+<button id ="search"onclick= "go()"> ok </button>
+<div id ="temp"> </div>
+<div id ="temp_max"></div>
+<div id ="temp_min"></div>
+<div id = "humid"></div>
+
+<script>
+
+function go(){
+var cityText=document.getElementById("city").value;
+getData(cityText).then(data=> {
+	console.log(data);
+	document.getElementById("temp").innerHTML= "tempreature: " + data["main"]["temp"];
+	document.getElementById("temp_max").innerHTML=data["main"]["temp_max"];
+	document.getElementById("temp_min").innerHTML=data["main"]["temp_min"];
+	document.getElementById("humid").innerHTML=data["main"]["humidity"];
+});
+}
+async function getData(city){
+var response= await fetch("http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid=5251176145337dc6fa5212c1ba21ddc5");
+return response.json();
+}
+
+
+
+</script>
+</body>
+
+
+
+
+</html>
